@@ -7,7 +7,7 @@ fengmap for react
 
 ## Using
 
-    * import js
+   * import js
 
     import fengmap.min.js from node_modules in react-fmap library.
 
@@ -15,7 +15,7 @@ fengmap for react
 
     `<script src="./node_modules/react-fmap/fengmap.min.js" ></script>`
 
-    * using in react
+   * using in react
 
     ```js
     class App extends Component {
