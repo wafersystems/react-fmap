@@ -9,19 +9,19 @@ fengmap for react
 
    * import js
 
-    import fengmap.min.js from node_modules in react-fmap library.
+   copy ./node_modules/react-fmap/js/fengmap.min.js to your public dir for html refs.
 
-    eg: index.html
+   eg: index.html
 
-    `<script src="./node_modules/react-fmap/fengmap.min.js" ></script>`
+   `<script src="./node_modules/react-fmap/js/fengmap.min.js" ></script>`
 
    * using in react
 
-    ```js
-    class App extends Component {
-    	render() {
-    		const mapProps = {
-    			fmapID: 'wafer-beijing',
+   ```js
+   class App extends Component {
+    render() {
+    	const mapProps = {
+    		fmapID: 'wafer-beijing',
     			appName:'北京威发新世纪',
     			mapKey:'3e7dba2418ac46e1af5a1abf17082db2',
     			height: 'calc(100vh - 254px)'
@@ -33,10 +33,10 @@ fengmap for react
     			</div>
     		);
     	}
-    }
-    ```
+   }
+   ```
 
-    > notice: mapKey is key of FengMap.
+   > notice: mapKey is key of FengMap.
 
 ## Props
 

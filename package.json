@@ -1,6 +1,6 @@
 {
   "name": "react-fmap",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "author": "kairi",
   "email": "kairi1227@126.com",
@@ -11,7 +11,8 @@
     "url": "git+https://github.com/kairi1227/react-fmap.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "js"
   ],
   "keywords": [
     "react",
@@ -39,7 +40,7 @@
     "build": "npm run clean && webpack -p && npm run copy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "copy": "copyfiles -f ./public/fengmap.min.js ./dist"
+    "copy": "copyfiles -f ./public/fengmap.min.js ./js"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
