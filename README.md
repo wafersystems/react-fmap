@@ -7,6 +7,10 @@ fengmap for react
 
 ## Using
 
+  * install
+
+  `npm i react-fmap`
+
    * import js
 
    copy ./node_modules/react-fmap/js/fengmap.min.js to your public dir for html refs.
