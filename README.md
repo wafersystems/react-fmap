@@ -42,4 +42,15 @@ fengmap for react
 
 > come soon...
 
-|---Props---|---default value ---|--- is required ---|---description ---|
+| Prop | default value  |  is required  | description |
+|------|-----|-----|----------------------------------|
+|fmapID|     | true | feng map id                     |
+|appName|    | false| application name                |
+|mapKey|     | true | feng map key                    |
+|onClick|    | false | a callback for click map       |
+|className|  | false | map mount dom's class name     |
+|width|      | false | map mount dom's width          |
+|height|     | false | map mount dom's height         |
+|defaultViewMode||false| 3d or 2d, value of ['3d', 'top']|
+|fMMapProps| | false |  new FMMap's other props       |
+|textMarkers|| false | text marker eg: {x, y, name[, z, ...]}|
