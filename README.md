@@ -52,4 +52,4 @@ fengmap for react
 |height|     | false | map mount dom's height         |
 |defaultViewMode|`top`|false| 3d or 2d, value of ['3d', 'top']|
 |fMMapProps| | false |  new FMMap's other props       |
-|textMarkers|| false | text marker eg: {x, y, name[, z, ...]}|
+|textMarkers|`[]`| false | text marker eg: {x, y, name[, z, ...]}|
