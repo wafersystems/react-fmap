@@ -40,5 +40,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "copy": "copyfiles -f ./public/fengmap.min.js ./dist"
+  },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
   }
 }
