@@ -18,6 +18,7 @@ fengmap for react
    * using in react
 
    ```js
+   import FMap from 'react-fmap';
    class App extends Component {
     render() {
     	const mapProps = {
@@ -40,8 +41,6 @@ fengmap for react
 
 ## Props
 
-> come soon...
-
 | Prop | default value  |  is required  | description |
 |------|-----|-----|----------------------------------|
 |fmapID|     | true | feng map id                     |
@@ -51,6 +50,6 @@ fengmap for react
 |className|  | false | map mount dom's class name     |
 |width|      | false | map mount dom's width          |
 |height|     | false | map mount dom's height         |
-|defaultViewMode||false| 3d or 2d, value of ['3d', 'top']|
+|defaultViewMode|`top`|false| 3d or 2d, value of ['3d', 'top']|
 |fMMapProps| | false |  new FMMap's other props       |
 |textMarkers|| false | text marker eg: {x, y, name[, z, ...]}|
