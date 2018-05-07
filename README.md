@@ -11,14 +11,6 @@ fengmap for react
 
   `npm i react-fmap`
 
-   * import js
-
-   copy ./node_modules/react-fmap/js/fengmap.min.js to your public dir for html refs.
-
-   eg: index.html
-
-   `<script src="./node_modules/react-fmap/js/fengmap.min.js" ></script>`
-
    * using in react
 
    ```js
@@ -47,6 +39,7 @@ fengmap for react
 
 | Prop | default value  |  is required  | description |
 |------|-----|-----|----------------------------------|
+|url|  [dome url](https://www.fengmap.com/fmAPI/demo/FMDemoBaseMap/lib/fengmap.min.js)   | false | fengmap.min.js                     |
 |fmapID|     | true | feng map id                     |
 |appName|    | false| application name                |
 |mapKey|     | true | feng map key                    |

@@ -4,18 +4,26 @@
  **/
 import React, {Component} from 'react';
 import PropsTypes from 'prop-types';
+import {loadFengmap} from './loadFengmap'
 
 class FMap extends Component {
+
+	map = null;
+	fengmap = window.fengmap;
 
 	constructor(props) {
 		super(props);
 		this.mapView = React.createRef();
 	}
 
-	map = null;
-	fengmap = window.fengmap;
-
 	componentDidMount() {
+		loadFengmap(this.props.url).then(e => this.initialMap(e));
+	}
+
+	initialMap(e) {
+		if(!this.fengmap) {
+			this.fengmap = e;
+		}
 		const {fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode, textMarkers, imageMarkers, toolControl, controlOptions, offLineOptions} = this.props;
 		this.map = new this.fengmap.FMMap({
 			container: document.getElementById('fmap-container'), //渲染dom
@@ -115,6 +123,7 @@ FMap.propTypes = {
 	fmapID: PropsTypes.string.isRequired,
 	appName: PropsTypes.string,
 	mapKey: PropsTypes.string.isRequired,
+	url: PropsTypes.string,
 	onClick: PropsTypes.func,
 	className: PropsTypes.string,
 	width: PropsTypes.string,
@@ -134,10 +143,11 @@ FMap.defaultProps = {
 	appName: 'Feng Map for Wafer',
 	onClick: () => {
 	},
+	url: 'https://www.fengmap.com/fmAPI/demo/FMDemoBaseMap/lib/fengmap.min.js',
 	className: undefined,
 	width: '100%',
 	height: '100%',
-	defaultViewMode: window.fengmap.FMViewMode.MODE_2D,
+	defaultViewMode: 'top',
 	mapOptions: {},
 	defaultMapScaleLevel: undefined,
 	textMarkers: [], //{name, x, y, fontsize, }
@@ -145,11 +155,7 @@ FMap.defaultProps = {
 	toolControl: {},
 	controlOptions: {},
 	setViewMode: () => {},
-	offLineOptions: {
-		mapServerURL: '',
-		mapThemeURL: '',
-		defaultThemeName: ''
-	}
+	offLineOptions: {}
 };
 
 export default FMap;
