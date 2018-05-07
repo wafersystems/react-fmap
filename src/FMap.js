@@ -7,11 +7,16 @@ import PropsTypes from 'prop-types';
 
 class FMap extends Component {
 
+	constructor(props) {
+		super(props);
+		this.mapView = React.createRef();
+	}
+
 	map = null;
 	fengmap = window.fengmap;
 
 	componentDidMount() {
-		const {fmapID, appName, mapKey, onClick, fMMapProps, defaultMapScaleLevel, defaultViewMode, textMarkers} = this.props;
+		const {fmapID, appName, mapKey, onClick, fMMapProps, defaultMapScaleLevel, defaultViewMode, textMarkers, toolControl, controlOptions} = this.props;
 		this.map = new this.fengmap.FMMap({
 			container: document.getElementById('fmap-container'), //渲染dom
 			appName,           //开发者应用名称
@@ -25,14 +30,31 @@ class FMap extends Component {
 
 		this.map.on('mapClickNode', (event) => {
 			onClick(event);
-			if(event.nodeType === 5) {
-			}
 		});
 
 		this.map.on('loadComplete', () => {
 			this.addTextMarker(textMarkers);
 		});
 
+		new this.fengmap.toolControl(this.map, {...toolControl});
+		new this.fengmap.controlOptions({...controlOptions});
+	}
+
+	getMap() {
+		if(this.map) {
+			return this.map;
+		}
+		return null;
+	}
+
+	setViewMode(e) {
+		if(this.map) {
+			if([window.fengmap.FMViewMode.MODE_2D, window.fengmap.FMViewMode.MODE_3D].some(t => t === e)) {
+				this.map.viewMode = e;
+			} else {
+				window.console.error('prop is one of [3d, top] ');
+			}
+		}
 	}
 
 	addTextMarker(textMarkers) {
@@ -62,7 +84,7 @@ class FMap extends Component {
 		};
 
 		return (
-			<div id={'fmap-container'} className={className} style={styles}/>
+			<div id={'fmap-container'} className={className} style={styles} ref={this.mapView}/>
 		);
 	}
 }
@@ -78,7 +100,10 @@ FMap.propTypes = {
 	defaultViewMode: PropsTypes.oneOf(['3d', 'top']),
 	fMMapProps: PropsTypes.object,
 	defaultMapScaleLevel: PropsTypes.number,
-	textMarkers: PropsTypes.array
+	textMarkers: PropsTypes.array,
+	toolControl: PropsTypes.object,
+	controlOptions: PropsTypes.object,
+	setViewMode: PropsTypes.func
 };
 
 FMap.defaultProps = {
@@ -91,7 +116,10 @@ FMap.defaultProps = {
 	defaultViewMode: window.fengmap.FMViewMode.MODE_2D,
 	fMMapProps: {},
 	defaultMapScaleLevel: undefined,
-	textMarkers: []//{name, x, y, fontSize, }
+	textMarkers: [], //{name, x, y, fontSize, }
+	toolControl: {},
+	controlOptions: {},
+	setViewMode: () => {}
 };
 
 export default FMap;

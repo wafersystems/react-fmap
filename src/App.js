@@ -47,7 +47,17 @@ class App extends Component {
 				<p className="App-intro">
 					To get started, edit <code>src/App.js</code> and save to reload.
 				</p>
-				<FMap {...mapProps} textMarkers={stations} onClick={e => console.log(e)}/>
+				<p className="App-intro">
+					<button onClick={() => {
+						this.map.setViewMode('3d')
+					}}>test view model</button>
+				</p>
+
+				<FMap {...mapProps} toolControl={{groupsButtonNeeded: true}} textMarkers={stations} onClick={e => {
+					if(this.map) {
+						console.log(this.map);
+					}
+				}} ref={r => this.map = r}/>
 			</div>
 		);
 	}

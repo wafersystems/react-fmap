@@ -57,3 +57,5 @@ fengmap for react
 |defaultViewMode|`top`|false| 3d or 2d, value of ['3d', 'top']|
 |fMMapProps| | false |  new FMMap's other props       |
 |textMarkers|`[]`| false | text marker eg: {x, y, name[, z, ...]}|
+|toolControl|`{}`| false | map control tool. eg: 2d or 3d tool |
+|controlOptions|`{}`| false | map control options, eg: position or offset |
