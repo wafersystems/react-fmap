@@ -59,3 +59,10 @@ fengmap for react
 |textMarkers|`[]`| false | text marker eg: {x, y, name[, z, ...]}|
 |toolControl|`{}`| false | map control tool. eg: 2d or 3d tool |
 |controlOptions|`{}`| false | map control options, eg: position or offset |
+
+### function
+
+|  name  |  props  |   return  |        description   |
+|------|-----|-----|----------------------------------|
+| getMap | void | this.map |  return fengmap object   |
+| setViewMode | mode: string `['top', '3d']` | this.map |  return fengmap object   |
