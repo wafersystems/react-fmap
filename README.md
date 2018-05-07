@@ -60,7 +60,7 @@ fengmap for react
 |imageMarkers|`[]`| false | image marker eg: {x, y, url[, z, ...]}|
 |toolControl|`{}`| false | map control tool. eg: 2d or 3d tool |
 |controlOptions|`{}`| false | map control options, eg: position or offset |
-|offLineOptions| [object](./#offLineOptions) | false | off line map props |
+|offLineOptions| [object](#offLineOptions) | false | off line map props |
 
 
 #### offLineOptions
