@@ -79,3 +79,10 @@ fengmap for react
 | addTextMarker | [] | void |  set texts marker   |
 | addImageMarker | [] | void |  set images marker   |
 |setTheme|themeName: string| void | set map theme name |
+
+
+### fengmap.min.js
+
+	if localize fengmap.min.js, then copy `node_modules/react-fmap/js/fengmap.min.js` to src(or can reach at a dir).
+
+	then import this is by `script` tag in `index.html`.
