@@ -46,8 +46,8 @@ class FMap extends Component {
 			this.addImageMarker(imageMarkers);
 		});
 
-		new this.fengmap.toolControl(this.map, {...toolControl});
-		new this.fengmap.controlOptions({...controlOptions});
+		toolControl && new this.fengmap.toolControl(this.map, {...toolControl});
+		controlOptions && new this.fengmap.controlOptions({...controlOptions});
 	}
 
 	getMap() {
@@ -152,8 +152,8 @@ FMap.defaultProps = {
 	defaultMapScaleLevel: undefined,
 	textMarkers: [], //{name, x, y, fontsize, }
 	imageMarkers: [], //{name, x, y, url, }
-	toolControl: {},
-	controlOptions: {},
+	toolControl: null,
+	controlOptions: null,
 	setViewMode: () => {},
 	offLineOptions: {}
 };
