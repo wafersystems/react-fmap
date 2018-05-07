@@ -39,7 +39,6 @@ fengmap for react
 
 | Prop | default value  |  is required  | description |
 |------|-----|-----|----------------------------------|
-|url|  [dome url](https://www.fengmap.com/fmAPI/demo/FMDemoBaseMap/lib/fengmap.min.js)   | false | fengmap.min.js                     |
 |fmapID|     | true | feng map id                     |
 |appName|    | false| application name                |
 |mapKey|     | true | feng map key                    |
@@ -53,12 +52,12 @@ fengmap for react
 |imageMarkers|`[]`| false | image marker eg: {x, y, url[, z, ...]}|
 |toolControl|`{}`| false | map control tool. eg: 2d or 3d tool |
 |controlOptions|`{}`| false | map control options, eg: position or offset |
-|offLineOptions| [object](./#offLineOptions) | false | off line map props |
+|offLineOptions| [object](#offlineoptions) | false | off line map props |
 
 
 #### offLineOptions
 
-```json
+```js
 	offLineOptions: {
 		mapServerURL: '',
 		mapThemeURL: '',
