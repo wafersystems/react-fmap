@@ -55,11 +55,27 @@ fengmap for react
 |width|      | false | map mount dom's width          |
 |height|     | false | map mount dom's height         |
 |defaultViewMode|`top`|false| 3d or 2d, value of ['3d', 'top']|
-|fMMapProps| | false |  new FMMap's other props       |
+|mapOptions| | false |  new FMMap's other props       |
 |textMarkers|`[]`| false | text marker eg: {x, y, name[, z, ...]}|
 |imageMarkers|`[]`| false | image marker eg: {x, y, url[, z, ...]}|
 |toolControl|`{}`| false | map control tool. eg: 2d or 3d tool |
 |controlOptions|`{}`| false | map control options, eg: position or offset |
+|offLineOptions| [object](./#offLineOptions) | false | off line map props |
+
+
+#### offLineOptions
+
+```json
+	offLineOptions: {
+		mapServerURL: '',
+		mapThemeURL: '',
+		defaultThemeName: ''
+		[,
+		...other props
+		]
+	}
+```
+
 
 ### function
 
@@ -69,3 +85,4 @@ fengmap for react
 | setViewMode | mode: string `['top', '3d']` | this.map |  return fengmap object   |
 | addTextMarker | [] | void |  set texts marker   |
 | addImageMarker | [] | void |  set images marker   |
+|setTheme|themeName: string| void | set map theme name |

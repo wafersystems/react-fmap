@@ -16,14 +16,15 @@ class FMap extends Component {
 	fengmap = window.fengmap;
 
 	componentDidMount() {
-		const {fmapID, appName, mapKey, onClick, fMMapProps, defaultMapScaleLevel, defaultViewMode, textMarkers, imageMarkers, toolControl, controlOptions} = this.props;
+		const {fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode, textMarkers, imageMarkers, toolControl, controlOptions, offLineOptions} = this.props;
 		this.map = new this.fengmap.FMMap({
 			container: document.getElementById('fmap-container'), //渲染dom
 			appName,           //开发者应用名称
 			key: mapKey,   //开发者申请应用下web服务的key
 			defaultMapScaleLevel,
 			defaultViewMode,
-			...fMMapProps
+			...offLineOptions,
+			...mapOptions
 		});
 		//打开Fengmap服务器的地图数据和主题
 		this.map.openMapById(fmapID);
@@ -55,6 +56,15 @@ class FMap extends Component {
 			} else {
 				window.console.error('prop is one of [3d, top] ');
 			}
+		}
+	}
+
+	setTheme(theme) {
+		if(!theme) {
+			window.console.error('theme name isn\'t allow empty. ');
+		}
+		if(this.map) {
+			this.map.themeName = theme;
 		}
 	}
 
@@ -110,13 +120,14 @@ FMap.propTypes = {
 	width: PropsTypes.string,
 	height: PropsTypes.string,
 	defaultViewMode: PropsTypes.oneOf(['3d', 'top']),
-	fMMapProps: PropsTypes.object,
+	mapOptions: PropsTypes.object,
 	defaultMapScaleLevel: PropsTypes.number,
 	textMarkers: PropsTypes.array,
 	imageMarkers: PropsTypes.array,
 	toolControl: PropsTypes.object,
 	controlOptions: PropsTypes.object,
-	setViewMode: PropsTypes.func
+	setViewMode: PropsTypes.func,
+	offLineOptions: PropsTypes.object
 };
 
 FMap.defaultProps = {
@@ -127,13 +138,18 @@ FMap.defaultProps = {
 	width: '100%',
 	height: '100%',
 	defaultViewMode: window.fengmap.FMViewMode.MODE_2D,
-	fMMapProps: {},
+	mapOptions: {},
 	defaultMapScaleLevel: undefined,
 	textMarkers: [], //{name, x, y, fontsize, }
 	imageMarkers: [], //{name, x, y, url, }
 	toolControl: {},
 	controlOptions: {},
-	setViewMode: () => {}
+	setViewMode: () => {},
+	offLineOptions: {
+		mapServerURL: '',
+		mapThemeURL: '',
+		defaultThemeName: ''
+	}
 };
 
 export default FMap;
