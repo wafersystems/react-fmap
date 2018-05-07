@@ -16,7 +16,7 @@ class FMap extends Component {
 	fengmap = window.fengmap;
 
 	componentDidMount() {
-		const {fmapID, appName, mapKey, onClick, fMMapProps, defaultMapScaleLevel, defaultViewMode, textMarkers, toolControl, controlOptions} = this.props;
+		const {fmapID, appName, mapKey, onClick, fMMapProps, defaultMapScaleLevel, defaultViewMode, textMarkers, imageMarkers, toolControl, controlOptions} = this.props;
 		this.map = new this.fengmap.FMMap({
 			container: document.getElementById('fmap-container'), //渲染dom
 			appName,           //开发者应用名称
@@ -34,6 +34,7 @@ class FMap extends Component {
 
 		this.map.on('loadComplete', () => {
 			this.addTextMarker(textMarkers);
+			this.addImageMarker(imageMarkers);
 		});
 
 		new this.fengmap.toolControl(this.map, {...toolControl});
@@ -57,6 +58,7 @@ class FMap extends Component {
 		}
 	}
 
+	// text marker
 	addTextMarker(textMarkers) {
 		const group = this.map.getFMGroup(this.map.groupIDs[0]);
 		const layer = new this.fengmap.FMTextMarkerLayer();
@@ -64,10 +66,20 @@ class FMap extends Component {
 		for(const mark of textMarkers) {
 			const im = new this.fengmap.FMTextMarker({
 				...mark,
-				x: mark.x,
-				y: mark.y,
-				name: mark.name || '',
-				fontsize: mark.fontSize || 12, //字体大小
+				callback: () => im.alwaysShow()
+			});
+			layer.addMarker(im);
+		}
+	}
+
+	//image marker
+	addImageMarker(imageMarkers) {
+		const group = this.map.getFMGroup(this.map.groupIDs[0]);
+		const layer = group.getOrCreateLayer('imageMarker');
+		group.addLayer(layer);
+		for(const mark of imageMarkers) {
+			const im = new this.fengmap.FMImageMarker({
+				...mark,
 				callback: () => im.alwaysShow()
 			});
 			layer.addMarker(im);
@@ -101,6 +113,7 @@ FMap.propTypes = {
 	fMMapProps: PropsTypes.object,
 	defaultMapScaleLevel: PropsTypes.number,
 	textMarkers: PropsTypes.array,
+	imageMarkers: PropsTypes.array,
 	toolControl: PropsTypes.object,
 	controlOptions: PropsTypes.object,
 	setViewMode: PropsTypes.func
@@ -116,7 +129,8 @@ FMap.defaultProps = {
 	defaultViewMode: window.fengmap.FMViewMode.MODE_2D,
 	fMMapProps: {},
 	defaultMapScaleLevel: undefined,
-	textMarkers: [], //{name, x, y, fontSize, }
+	textMarkers: [], //{name, x, y, fontsize, }
+	imageMarkers: [], //{name, x, y, url, }
 	toolControl: {},
 	controlOptions: {},
 	setViewMode: () => {}

@@ -16,12 +16,12 @@ class App extends Component {
 		};
 
 		const stations = [
-			{
-				x: 12958821.565,
-				y: 4852547.234999999,
-				z: 0,
-				name: '3F01'
-			},
+			// {
+			// 	x: 12958821.565,
+			// 	y: 4852547.234999999,
+			// 	z: 0,
+			// 	name: '3F01'
+			// },
 			{
 				id: 123,
 				stationId: 111,
@@ -35,6 +35,15 @@ class App extends Component {
 				y: 4852550.31,
 				z: 0,
 				name: '3F03'
+			}
+		];
+		const images = [
+			{
+				x: 12958821.565,
+				y: 4852547.234999999,
+				z: 0,
+				name: '3F01',
+				url: '/static/media/logo.5d5d9eef.svg'
 			}
 		];
 
@@ -53,7 +62,7 @@ class App extends Component {
 					}}>test view model</button>
 				</p>
 
-				<FMap {...mapProps} toolControl={{groupsButtonNeeded: true}} textMarkers={stations} onClick={e => {
+				<FMap {...mapProps} imageMarkers={images} toolControl={{groupsButtonNeeded: true}} textMarkers={stations} onClick={e => {
 					if(this.map) {
 						console.log(this.map);
 					}
