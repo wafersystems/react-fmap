@@ -70,12 +70,11 @@ class App extends Component {
 
 				<FMap {...mapProps} imageMarkers={images} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
 					console.log(e)
-					let {popMarker} = this.state;
-					popMarker.push({mapCoord: {
+					const station = {mapCoord: {
 							//设置弹框的x轴
-							x: e.target.x,
+							x: e.x,
 							//设置弹框的y轴
-							y: e.target.y,
+							y: e.y,
 							//设置弹框位于的楼层
 							groupID: e.groupID
 						},
@@ -85,8 +84,8 @@ class App extends Component {
 						height: 100,
 						marginTop: 10,
 						//设置弹框的内容
-						content: '这是一个信息框'});
-					this.setState({popMarker});
+						content: '这是一个信息框'};
+					this.map.setPopMarker(station);
 				}} ref={r => this.map = r} popMarkers={this.state.popMarker}/>
 			</div>
 		);

@@ -76,8 +76,6 @@ fengmap for react
 |  name  |  props  |   return  |        description   |
 |------|-----|-----|----------------------------------|
 | setViewMode | mode: string `['top', '3d']` | this.map |  return fengmap object   |
-| addTextMarker | [] | void |  set texts marker   |
-| addImageMarker | [] | void |  set images marker   |
 |setTheme|themeName: string| void | set map theme name |
 |setPopMarker|options: `{}`| `popMarker` | pop mark on map. call `popMarker.close()` close pop marker |
 

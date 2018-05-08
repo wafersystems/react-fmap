@@ -13,7 +13,7 @@ class FMap extends Component {
 
 	constructor(props) {
 		super(props);
-		this.mapView = React.createRef();
+		this.mapView = null;
 	}
 
 	componentDidMount() {
@@ -86,7 +86,7 @@ class FMap extends Component {
 	// text marker
 	addTextMarker(textMarkers) {
 		const group = this.map.getFMGroup(this.map.groupIDs[0]);
-		const layer = new this.fengmap.FMTextMarkerLayer();
+		const layer = group.getOrCreateLayer('textMarker');
 		group.addLayer(layer);
 		for(const mark of textMarkers) {
 			const im = new this.fengmap.FMTextMarker({
@@ -135,7 +135,7 @@ class FMap extends Component {
 		}
 
 		return (
-			<div id={'fmap-container'} className={className} style={styles} ref={this.mapView}/>
+			<div id={'fmap-container'} className={className} style={styles} ref={r => this.mapView = r}/>
 		);
 	}
 }
