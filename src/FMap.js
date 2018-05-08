@@ -116,17 +116,23 @@ class FMap extends Component {
 		if(!options) {
 			throw new Error('controlOptions must be set.');
 		}
-		return new this.fengmap.FMPopInfoWindow(this.map, options);
+		return new this.fengmap.FMPopInfoWindow(this.map, new this.fengmap.controlOptions(options));
 	}
 
 
 	render() {
-		const {className, width, height} = this.props;
+		const {className, width, height, popMarkers} = this.props;
 
 		const styles = {
 			width,
 			height
 		};
+
+		if(popMarkers && popMarkers instanceof Array) {
+			for(const marker of popMarkers) {
+				this.setPopMarker(marker);
+			}
+		}
 
 		return (
 			<div id={'fmap-container'} className={className} style={styles} ref={this.mapView}/>
@@ -148,6 +154,7 @@ FMap.propTypes = {
 	defaultMapScaleLevel: PropsTypes.number,
 	textMarkers: PropsTypes.array,
 	imageMarkers: PropsTypes.array,
+	popMarkers: PropsTypes.array,
 	toolControl: PropsTypes.object,
 	controlOptions: PropsTypes.object,
 	setViewMode: PropsTypes.func,
@@ -167,6 +174,7 @@ FMap.defaultProps = {
 	defaultMapScaleLevel: undefined,
 	textMarkers: [], //{name, x, y, fontsize, }
 	imageMarkers: [], //{name, x, y, url, }
+	popMarkers: null,
 	toolControl: null,
 	controlOptions: null,
 	setViewMode: () => {},

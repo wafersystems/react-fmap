@@ -54,6 +54,7 @@ fengmap for react
 |toolControl|`null`| false | map control tool. eg: 2d or 3d tool |
 |controlOptions|`null`| false | map control options, eg: position or offset |
 |offLineOptions| [object](#offlineoptions) | false | off line map props |
+|popMarkers| `null` | false | pop marker. props is controlOptions. |
 
 
 #### offLineOptions
