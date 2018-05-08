@@ -78,6 +78,7 @@ fengmap for react
 | addTextMarker | [] | void |  set texts marker   |
 | addImageMarker | [] | void |  set images marker   |
 |setTheme|themeName: string| void | set map theme name |
+|setPopMarker|options: `{}`| `popMarker` | pop mark on map. call `popMarker.close()` close pop marker |
 
 
 ### fengmap.min.js

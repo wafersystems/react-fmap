@@ -21,11 +21,16 @@ class FMap extends Component {
 	}
 
 	initialMap(e) {
-		if(!this.fengmap) {
+		if (!this.fengmap) {
 			this.fengmap = e;
 			window.fengmap = null; //删除window中的对象。
 		}
-		const {fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode, textMarkers, imageMarkers, toolControl, controlOptions, offLineOptions} = this.props;
+		const {
+			fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode,
+			textMarkers, imageMarkers,
+			toolControl, controlOptions,
+			offLineOptions
+		} = this.props;
 		this.map = new this.fengmap.FMMap({
 			container: document.getElementById('fmap-container'), //渲染dom
 			appName,           //开发者应用名称
@@ -50,6 +55,7 @@ class FMap extends Component {
 		toolControl && new this.fengmap.toolControl(this.map, {...toolControl});
 		controlOptions && new this.fengmap.controlOptions({...controlOptions});
 	}
+
 
 	// getMap() {
 	// 	if(this.map) {
@@ -103,6 +109,14 @@ class FMap extends Component {
 			});
 			layer.addMarker(im);
 		}
+	}
+
+
+	setPopMarker(options) {
+		if(!options) {
+			throw new Error('controlOptions must be set.');
+		}
+		return new this.fengmap.FMPopInfoWindow(this.map, options);
 	}
 
 
