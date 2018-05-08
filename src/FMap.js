@@ -23,6 +23,7 @@ class FMap extends Component {
 	initialMap(e) {
 		if(!this.fengmap) {
 			this.fengmap = e;
+			window.fengmap = null; //删除window中的对象。
 		}
 		const {fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode, textMarkers, imageMarkers, toolControl, controlOptions, offLineOptions} = this.props;
 		this.map = new this.fengmap.FMMap({
@@ -50,12 +51,12 @@ class FMap extends Component {
 		controlOptions && new this.fengmap.controlOptions({...controlOptions});
 	}
 
-	getMap() {
-		if(this.map) {
-			return this.map;
-		}
-		return null;
-	}
+	// getMap() {
+	// 	if(this.map) {
+	// 		return this.map;
+	// 	}
+	// 	return null;
+	// }
 
 	setViewMode(e) {
 		if(this.map) {
