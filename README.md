@@ -79,6 +79,7 @@ fengmap for react
 |setTheme|themeName: string| void | set map theme name |
 |setPopMarker|options: `{}`| `popMarker` | pop mark on map. call `popMarker.close()` close pop marker |
 |getSearchReq|(request, callback)| Array: FMap | search map. request is object.eg: {ID: ''}  |
+|onNavigation|options: `{}`| FMap | get navigation object  |
 
 
 ### fengmap.min.js

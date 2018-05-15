@@ -137,11 +137,17 @@ class FMap extends Component {
 		);
 	}
 
+	//检索
 	getSearchReq(request, callBack) {
 		this.fengmap.MapUtil.search(this.map, 'all', {
 			nodeType: this.fengmap.FMNodeType.MODEL,
 			...request
 		}, callBack);
+	}
+
+	//定位，导航
+	onNavigation(options) {
+		return new this.fengmap.FMNavigation({map: this.map, ...options});
 	}
 }
 

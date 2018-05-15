@@ -71,7 +71,13 @@ class App extends Component {
 							console.log(v)
 						});
 					}}>
-						search groupId
+						search
+					</button>
+					<button onClick={() => {
+						const map = this.map.onNavigation({});
+						console.log(map);
+					}}>
+						navigation
 					</button>
 				</p>
 
