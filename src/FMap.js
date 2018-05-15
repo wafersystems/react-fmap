@@ -111,14 +111,12 @@ class FMap extends Component {
 		}
 	}
 
-
 	setPopMarker(options) {
 		if(!options) {
 			throw new Error('controlOptions must be set.');
 		}
 		return new this.fengmap.FMPopInfoWindow(this.map, new this.fengmap.controlOptions(options));
 	}
-
 
 	render() {
 		const {className, width, height, popMarkers} = this.props;
@@ -137,6 +135,13 @@ class FMap extends Component {
 		return (
 			<div id={'fmap-container'} className={className} style={styles} ref={r => this.mapView = r}/>
 		);
+	}
+
+	getSearchReq(request, callBack) {
+		this.fengmap.MapUtil.search(this.map, 'all', {
+			nodeType: this.fengmap.FMNodeType.MODEL,
+			...request
+		}, callBack);
 	}
 }
 

@@ -66,6 +66,13 @@ class App extends Component {
 					<button onClick={() => {
 						this.map.setViewMode('3d')
 					}}>test view model</button>
+					<button onClick={() => {
+						this.map.getSearchReq({ID: '80'}, v => {
+							console.log(v)
+						});
+					}}>
+						search groupId
+					</button>
 				</p>
 
 				<FMap {...mapProps} imageMarkers={images} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
