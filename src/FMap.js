@@ -66,7 +66,7 @@ class FMap extends Component {
 
 	setViewMode(e) {
 		if(this.map) {
-			if([window.fengmap.FMViewMode.MODE_2D, window.fengmap.FMViewMode.MODE_3D].some(t => t === e)) {
+			if([this.fengmap.FMViewMode.MODE_2D, this.fengmap.FMViewMode.MODE_3D].some(t => t === e)) {
 				this.map.viewMode = e;
 			} else {
 				window.console.error('prop is one of [3d, top] ');
