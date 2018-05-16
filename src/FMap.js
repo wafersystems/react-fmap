@@ -29,7 +29,8 @@ class FMap extends Component {
 			fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode,
 			textMarkers, imageMarkers,
 			toolControl, controlOptions,
-			offLineOptions
+			offLineOptions,
+			initialPosition,
 		} = this.props;
 		this.map = new this.fengmap.FMMap({
 			container: document.getElementById('fmap-container'), //渲染dom
@@ -50,6 +51,7 @@ class FMap extends Component {
 		this.map.on('loadComplete', () => {
 			this.addTextMarker(textMarkers);
 			this.addImageMarker(imageMarkers);
+			initialPosition && this.map.moveTo({groupID: this.map.groupIDs[0], ...initialPosition});
 		});
 
 		toolControl && new this.fengmap.toolControl(this.map, {...toolControl});
@@ -174,7 +176,8 @@ FMap.propTypes = {
 	toolControl: PropsTypes.object,
 	controlOptions: PropsTypes.object,
 	setViewMode: PropsTypes.func,
-	offLineOptions: PropsTypes.object
+	offLineOptions: PropsTypes.object,
+	initialPosition: PropsTypes.object
 };
 
 FMap.defaultProps = {
@@ -194,7 +197,8 @@ FMap.defaultProps = {
 	toolControl: null,
 	controlOptions: null,
 	setViewMode: () => {},
-	offLineOptions: {}
+	offLineOptions: {},
+	initialPosition: null
 };
 
 export default FMap;

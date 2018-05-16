@@ -53,6 +53,8 @@ class App extends Component {
 			}
 		];
 
+		const initialPosition = {x: 12958819.3, y: 4852556.59, z: 0};
+
 		return (
 			<div className="App">
 				<header className="App-header">
@@ -99,7 +101,7 @@ class App extends Component {
 					</button>
 				</p>
 
-				<FMap {...mapProps} imageMarkers={images} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
+				<FMap {...mapProps} imageMarkers={images} initialPosition={initialPosition} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
 					console.log(e)
 					const station = {mapCoord: {
 							//设置弹框的x轴
