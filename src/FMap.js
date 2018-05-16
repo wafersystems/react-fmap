@@ -149,6 +149,11 @@ class FMap extends Component {
 	onNavigation(options) {
 		return new this.fengmap.FMNavigation({map: this.map, ...options});
 	}
+
+	onMapFunction(funcName, ...args) {
+		this.map[funcName](...args);
+	}
+
 }
 
 FMap.propTypes = {

@@ -92,6 +92,11 @@ class App extends Component {
 					}}>
 						navigation
 					</button>
+					<button onClick={() => {
+						this.map.onMapFunction('moveTo', {x: 12958819.3, y: 4852556.59, groupID: 1, z: 0});
+					}}>
+						function call back
+					</button>
 				</p>
 
 				<FMap {...mapProps} imageMarkers={images} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {

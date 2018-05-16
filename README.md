@@ -80,29 +80,35 @@ fengmap for react
 |setPopMarker|options: `{}`| `popMarker` | pop mark on map. call `popMarker.close()` close pop marker |
 |getSearchReq|(request, callback)| Array: FMap | search map. request is object.eg: {ID: ''}  |
 |onNavigation|options: `{}`| FMap | get navigation object  |
+|onMapFunction|name[, options]| null | apply map function  |
 
 ### add text marker
 
 ```js
-		this.map.getSearchReq({ID: 61}, v => {
-			 this.map.addTextMarker([{
-			  x: 12958819.3,
-			  y: 4852556.59,
-			  z: 0,
-			  name: '3F04'
-			 }], v.groupID);
-		});
+	this.map.getSearchReq({ID: 61}, v => {
+		this.map.addTextMarker([{
+		x: 12958819.3,
+		y: 4852556.59,
+		z: 0,
+		name: '3F04'
+		}], v.groupID);
+	});
 ```
 ### add image marker
 
 ```js
-		this.map.addImageMarker([{
-        x:  12958819.3,
-        y: 4852556.59,
-        z: 0,
-        name: '3F01',
-        url: '/static/media/logo.5d5d9eef.svg'
-      }], v.groupID);
+ this.map.addImageMarker([{
+		x:  12958819.3,
+		y: 4852556.59,
+		z: 0,
+		name: '3F01',
+		url: '/static/media/logo.5d5d9eef.svg'
+	}], v.groupID);
+```
+
+### onMapFunction
+```js
+	this.map.onMapFunction('moveTo', {x: 12958819.3, y: 4852556.59, groupID: 1, z: 0});
 ```
 
 
