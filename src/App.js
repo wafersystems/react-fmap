@@ -67,8 +67,21 @@ class App extends Component {
 						this.map.setViewMode('3d')
 					}}>test view model</button>
 					<button onClick={() => {
-						this.map.getSearchReq({ID: '80'}, v => {
+						this.map.getSearchReq({ID: 61}, v => {
 							console.log(v)
+							// this.map.addTextMarker([{
+							// 	x: 12958819.3,
+							// 	y: 4852556.59,
+							// 	z: 0,
+							// 	name: '3F04'
+							// }], v.groupID);
+							this.map.addImageMarker([{
+								x:  12958819.3,
+								y: 4852556.59,
+								z: 0,
+								name: '3F01',
+								url: '/static/media/logo.5d5d9eef.svg'
+							}], v.groupID);
 						});
 					}}>
 						search

@@ -84,8 +84,8 @@ class FMap extends Component {
 	}
 
 	// text marker
-	addTextMarker(textMarkers) {
-		const group = this.map.getFMGroup(this.map.groupIDs[0]);
+	addTextMarker(textMarkers, groupID) {
+		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		const layer = group.getOrCreateLayer('textMarker');
 		group.addLayer(layer);
 		for(const mark of textMarkers) {
@@ -98,8 +98,8 @@ class FMap extends Component {
 	}
 
 	//image marker
-	addImageMarker(imageMarkers) {
-		const group = this.map.getFMGroup(this.map.groupIDs[0]);
+	addImageMarker(imageMarkers, groupID) {
+		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		const layer = group.getOrCreateLayer('imageMarker');
 		group.addLayer(layer);
 		for(const mark of imageMarkers) {

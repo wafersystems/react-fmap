@@ -81,6 +81,30 @@ fengmap for react
 |getSearchReq|(request, callback)| Array: FMap | search map. request is object.eg: {ID: ''}  |
 |onNavigation|options: `{}`| FMap | get navigation object  |
 
+### add text marker
+
+```js
+		this.map.getSearchReq({ID: 61}, v => {
+			 this.map.addTextMarker([{
+			  x: 12958819.3,
+			  y: 4852556.59,
+			  z: 0,
+			  name: '3F04'
+			 }], v.groupID);
+		});
+```
+### add image marker
+
+```js
+		this.map.addImageMarker([{
+        x:  12958819.3,
+        y: 4852556.59,
+        z: 0,
+        name: '3F01',
+        url: '/static/media/logo.5d5d9eef.svg'
+      }], v.groupID);
+```
+
 
 ### fengmap.min.js
 
