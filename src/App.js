@@ -101,7 +101,10 @@ class App extends Component {
 					</button>
 				</p>
 
-				<FMap {...mapProps} imageMarkers={images} initialPosition={initialPosition} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
+				<FMap {...mapProps} imageMarkers={images} loadComplete={() => {
+					this.test1();
+					this.test2();
+				}} initialPosition={initialPosition} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
 					console.log(e)
 					const station = {mapCoord: {
 							//设置弹框的x轴
@@ -122,6 +125,13 @@ class App extends Component {
 				}} ref={r => this.map = r} popMarkers={this.state.popMarker}/>
 			</div>
 		);
+	}
+
+	test1() {
+		console.log('test1');
+	}
+	test2() {
+		console.log('test2');
 	}
 }
 

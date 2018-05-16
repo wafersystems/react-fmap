@@ -56,6 +56,7 @@ fengmap for react
 |offLineOptions| [object](#offlineoptions) | false | off line map props |
 |popMarkers| `null` | false | pop marker. props is controlOptions. |
 |initialPosition| `null` | false | initial move to position. |
+|loadComplete| `null` | false | map load complete function. |
 
 
 #### offLineOptions
