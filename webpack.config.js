@@ -54,6 +54,7 @@ module.exports = {
 			commonjs: 'react-dom',
 			amd: 'react-dom',
 		},
-		'prop-types': 'prop-types'
+		'prop-types': 'prop-types',
+		'lodash': 'lodash'
 	}
 };

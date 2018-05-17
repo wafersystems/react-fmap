@@ -4,7 +4,8 @@
  **/
 import React, {Component} from 'react';
 import PropsTypes from 'prop-types';
-import {loadFengmap} from './loadFengmap'
+import {loadFengmap} from './loadFengmap';
+import isEqual from 'lodash/isEqual';
 
 class FMap extends Component {
 
@@ -23,6 +24,23 @@ class FMap extends Component {
 	componentWillUnmount() {
 		this.map = null;
 		this.fengmap = null;
+	}
+
+	componentWillReceiveProps(np) {
+		if(!isEqual(np.textMarkers, this.props.textMarkers)) {
+			const newTemp = np.textMarkers.filter(n => this.props.textMarkers.every(o => !isEqual(o, n))) || [];
+			this.addTextMarker(newTemp);
+		}
+		if(!isEqual(np.imageMarkers, this.props.imageMarkers)) {
+			const newTemp = np.imageMarkers.filter(n => this.props.imageMarkers.every(o => !isEqual(o, n))) || [];
+			this.addImageMarker(newTemp);
+		}
+		if(!isEqual(np.popMarkers, this.props.popMarkers)) {
+			const newTemp = np.popMarkers.filter(n => this.props.popMarkers.every(o => !isEqual(o, n))) || [];
+			for(const marker of newTemp) {
+				this.setPopMarker(marker);
+			}
+		}
 	}
 
 	initialMap(e) {
@@ -128,18 +146,12 @@ class FMap extends Component {
 	}
 
 	render() {
-		const {className, width, height, popMarkers} = this.props;
+		const {className, width, height} = this.props;
 
 		const styles = {
 			width,
 			height
 		};
-
-		if(popMarkers && popMarkers instanceof Array) {
-			for(const marker of popMarkers) {
-				this.setPopMarker(marker);
-			}
-		}
 
 		return (
 			<div id={'fmap-container'} className={className} style={styles} ref={r => this.mapView = r}/>

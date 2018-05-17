@@ -99,6 +99,12 @@ class App extends Component {
 					}}>
 						function call back
 					</button>
+					<button onClick={() => {
+						this.setState({stations: this.state.stations.concat({x:  12958819.3,
+								y: 4852556.59, name: '3F05'})})
+					}}>
+						add text marker
+					</button>
 				</p>
 
 				<FMap {...mapProps} imageMarkers={images} loadComplete={() => {
@@ -122,7 +128,7 @@ class App extends Component {
 						//设置弹框的内容
 						content: '这是一个信息框'};
 					this.map.setPopMarker(station);
-				}} ref={r => this.map = r} popMarkers={this.state.popMarker}/>
+				}} ref={r => this.map = r} />
 			</div>
 		);
 	}
