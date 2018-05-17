@@ -17,7 +17,12 @@ class FMap extends Component {
 	}
 
 	componentDidMount() {
-		loadFengmap(this.props.url).then(e => this.initialMap(e));
+		loadFengmap(this.props.url).then(e => this.initialMap(e)).catch(e => {throw new Error(e)});
+	}
+
+	componentWillUnmount() {
+		this.map = null;
+		this.fengmap = null;
 	}
 
 	initialMap(e) {
