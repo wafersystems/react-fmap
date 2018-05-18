@@ -8,6 +8,7 @@ class App extends Component {
 	constructor() {
 		super(...arguments);
 		this.state = {
+			showMap: true,
 			 stations : [
 				// {
 				// 	x: 12958821.565,
@@ -66,6 +67,9 @@ class App extends Component {
 				</p>
 				<p className="App-intro">
 					<button onClick={() => {
+						this.setState({showMap: !this.state.showMap});
+					}}>map show or hidden</button>
+					<button onClick={() => {
 						this.map.setViewMode('3d')
 					}}>test view model</button>
 					<button onClick={() => {
@@ -107,7 +111,7 @@ class App extends Component {
 					</button>
 				</p>
 
-				<FMap {...mapProps} imageMarkers={images} loadComplete={() => {
+				{this.state.showMap && <FMap {...mapProps} imageMarkers={images} loadComplete={() => {
 					this.test1();
 					this.test2();
 				}} initialPosition={initialPosition} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
@@ -128,7 +132,7 @@ class App extends Component {
 						//设置弹框的内容
 						content: '这是一个信息框'};
 					this.map.setPopMarker(station);
-				}} ref={r => this.map = r} />
+				}} ref={r => this.map = r} />}
 			</div>
 		);
 	}

@@ -5,7 +5,7 @@
 
 export const loadFengmap = (url) => {
 	return new Promise(resolve => {
-		if(document.getElementById('fmap-script') && document.getElementById('fmap-script').src === url && window.fengmap) {
+		if(document.getElementById('fmap-script') && document.getElementById('fmap-script').src.match(new RegExp(`${url}$`)) && window.fengmap) {
 			resolve(window.fengmap);
 		} else {
 			//得到html的头部dom
