@@ -46,7 +46,6 @@ class FMap extends Component {
 	initialMap(e) {
 		if (!this.fengmap) {
 			this.fengmap = e;
-			window.fengmap = null; //删除window中的对象。
 		}
 		const {
 			fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode,
