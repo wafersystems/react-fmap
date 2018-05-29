@@ -28,12 +28,13 @@ class FMap extends Component {
 
 	componentWillReceiveProps(np) {
 		if(!isEqual(np.textMarkers, this.props.textMarkers)) {
-			const newTemp = np.textMarkers.filter(n => this.props.textMarkers.every(o => !isEqual(o, n))) || [];
-			this.addTextMarker(newTemp);
+			// const newTemp = np.textMarkers.filter(n => this.props.textMarkers.every(o => !isEqual(o, n))) || [];
+			// (new this.fengmap.FMTextMarkerLayer()).removeAll();
+			this.addTextMarker(np.textMarkers);
 		}
 		if(!isEqual(np.imageMarkers, this.props.imageMarkers)) {
-			const newTemp = np.imageMarkers.filter(n => this.props.imageMarkers.every(o => !isEqual(o, n))) || [];
-			this.addImageMarker(newTemp);
+			// const newTemp = np.imageMarkers.filter(n => this.props.imageMarkers.every(o => !isEqual(o, n))) || [];
+			this.addImageMarker(np.imageMarkers);
 		}
 		if(!isEqual(np.popMarkers, this.props.popMarkers)) {
 			const newTemp = np.popMarkers.filter(n => this.props.popMarkers.every(o => !isEqual(o, n))) || [];
@@ -113,6 +114,7 @@ class FMap extends Component {
 	addTextMarker(textMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		const layer = group.getOrCreateLayer('textMarker');
+		layer.removeAll();
 		group.addLayer(layer);
 		for(const mark of textMarkers) {
 			const im = new this.fengmap.FMTextMarker({
@@ -127,6 +129,7 @@ class FMap extends Component {
 	addImageMarker(imageMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		const layer = group.getOrCreateLayer('imageMarker');
+		layer.removeAll();
 		group.addLayer(layer);
 		for(const mark of imageMarkers) {
 			const im = new this.fengmap.FMImageMarker({

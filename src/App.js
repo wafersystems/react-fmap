@@ -109,6 +109,10 @@ class App extends Component {
 					}}>
 						add text marker
 					</button>
+					<button onClick={() => {
+						this.setState({stations: []})}}>
+						remove text marker
+					</button>
 				</p>
 
 				{this.state.showMap && <FMap {...mapProps} imageMarkers={images} loadComplete={() => {
