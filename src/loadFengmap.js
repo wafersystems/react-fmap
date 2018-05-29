@@ -14,8 +14,12 @@ export const loadFengmap = (url) => {
 			let myScript = document.createElement('script');
 			myScript.id = 'fmap-script';
 			myScript.src = url;           //指定脚本路径
-			myScript.defer = true;              //程序下载完后再解析和执行
-			theHead.appendChild(myScript);      //把dom挂载到头部
+			// myScript.defer = true;              //程序下载完后再解析和执行
+			if(document.getElementById('fmap-script') && document.getElementById('fmap-script')) {
+				theHead.replaceChild(myScript, document.getElementById('fmap-script') && document.getElementById('fmap-script'));
+			} else {
+				theHead.appendChild(myScript); //把dom挂载到头部
+			}
 			let __js_interval = setInterval(() => {
 				if(window.fengmap) {
 					if(__js_interval) {

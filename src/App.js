@@ -42,7 +42,8 @@ class App extends Component {
 			appName: '北京威发新世纪',
 			mapKey: '3e7dba2418ac46e1af5a1abf17082db2',
 			height: 'calc(100vh - 254px)',
-			defaultViewMode: 'top'
+			defaultViewMode: 'top',
+			url: './fengmap.min.js'
 		};
 		const images = [
 			{
