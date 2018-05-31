@@ -5,7 +5,7 @@
 
 export const loadFengmap = (url) => {
 	return new Promise(resolve => {
-		if(document.getElementById('fmap-script')) {
+		if(window.fengmap || document.getElementById('fmap-script')) {
 			resolve(window.fengmap);
 		} else {
 			//得到html的头部dom
@@ -24,7 +24,7 @@ export const loadFengmap = (url) => {
 					}
 					resolve(window.fengmap);
 				}
-			}, 100);
+			}, 500);
 		}
 	});
 };

@@ -28,12 +28,9 @@ class FMap extends Component {
 
 	componentWillReceiveProps(np) {
 		if(!isEqual(np.textMarkers, this.props.textMarkers)) {
-			// const newTemp = np.textMarkers.filter(n => this.props.textMarkers.every(o => !isEqual(o, n))) || [];
-			// (new this.fengmap.FMTextMarkerLayer()).removeAll();
 			this.addTextMarker(np.textMarkers);
 		}
 		if(!isEqual(np.imageMarkers, this.props.imageMarkers)) {
-			// const newTemp = np.imageMarkers.filter(n => this.props.imageMarkers.every(o => !isEqual(o, n))) || [];
 			this.addImageMarker(np.imageMarkers);
 		}
 		if(!isEqual(np.popMarkers, this.props.popMarkers)) {
