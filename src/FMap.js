@@ -111,7 +111,7 @@ class FMap extends Component {
 	addTextMarker(textMarkers = this.state.textMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		if(!group) {
-			return;
+			throw new Error('Feng map not found groupIDs');
 		}
 		const layer = group.getOrCreateLayer('textMarker');
 		layer.removeAll();
@@ -129,7 +129,7 @@ class FMap extends Component {
 	addImageMarker(imageMarkers = this.state.imageMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		if(!group) {
-			return;
+			throw new Error('Feng map not found groupIDs');
 		}
 		const layer = group.getOrCreateLayer('imageMarker');
 		layer.removeAll();
