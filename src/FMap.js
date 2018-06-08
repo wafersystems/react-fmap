@@ -15,11 +15,10 @@ class FMap extends Component {
 	constructor(props) {
 		super(props);
 		this.mapView = null;
+		this.state = { textMarkers : props.textMarkers || [], imageMarkers : props.imageMarkers || []};
+		loadFengmap(props.url).then(e => this.initialMap(e)).catch(e => {throw new Error(e)});
 	}
 
-	componentDidMount() {
-		loadFengmap(this.props.url).then(e => this.initialMap(e)).catch(e => {throw new Error(e)});
-	}
 
 	componentWillUnmount() {
 		this.map = null;
@@ -28,9 +27,11 @@ class FMap extends Component {
 
 	componentWillReceiveProps(np) {
 		if(!isEqual(np.textMarkers, this.props.textMarkers)) {
+			this.setState({textMarkers: np.textMarkers});
 			this.addTextMarker(np.textMarkers);
 		}
 		if(!isEqual(np.imageMarkers, this.props.imageMarkers)) {
+			this.setState({imageMarkers: np.imageMarkers});
 			this.addImageMarker(np.imageMarkers);
 		}
 		if(!isEqual(np.popMarkers, this.props.popMarkers)) {
@@ -47,7 +48,6 @@ class FMap extends Component {
 		}
 		const {
 			fmapID, appName, mapKey, onClick, mapOptions, defaultMapScaleLevel, defaultViewMode,
-			textMarkers, imageMarkers,
 			toolControl, controlOptions,
 			offLineOptions,
 			initialPosition,
@@ -70,8 +70,8 @@ class FMap extends Component {
 		});
 
 		this.map.on('loadComplete', () => {
-			this.addTextMarker(textMarkers);
-			this.addImageMarker(imageMarkers);
+			this.addTextMarker();
+			this.addImageMarker();
 			initialPosition && this.map.moveTo({groupID: this.map.groupIDs[0], ...initialPosition});
 			loadComplete && loadComplete();
 		});
@@ -108,7 +108,7 @@ class FMap extends Component {
 	}
 
 	// text marker
-	addTextMarker(textMarkers, groupID) {
+	addTextMarker(textMarkers = this.state.textMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		if(!group) {
 			return;
@@ -126,7 +126,7 @@ class FMap extends Component {
 	}
 
 	//image marker
-	addImageMarker(imageMarkers, groupID) {
+	addImageMarker(imageMarkers = this.state.imageMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
 		if(!group) {
 			return;

@@ -31,7 +31,16 @@ class App extends Component {
 					name: '3F03'
 				}
 			],
-			popMarker: []
+			popMarker: [],
+			images : [
+				{
+					x: 12958821.565,
+					y: 4852547.234999999,
+					z: 0,
+					name: '3F01',
+					url: '/static/media/logo.5d5d9eef.svg'
+				}
+			]
 		};
 	}
 
@@ -45,15 +54,6 @@ class App extends Component {
 			defaultViewMode: 'top',
 			url: './fengmap.min.js'
 		};
-		const images = [
-			{
-				x: 12958821.565,
-				y: 4852547.234999999,
-				z: 0,
-				name: '3F01',
-				url: '/static/media/logo.5d5d9eef.svg'
-			}
-		];
 
 		const initialPosition = {x: 12958819.3, y: 4852556.59, z: 0};
 
@@ -114,9 +114,23 @@ class App extends Component {
 						this.setState({stations: []})}}>
 						remove text marker
 					</button>
+					<button onClick={() => {
+						this.setState({images: []})}}>
+						remove image marker
+					</button>
+					<button onClick={() => {
+						this.setState({images: this.state.images.concat([{
+								x:  12958819.3,
+								y: 4852556.59,
+								z: 0,
+								name: '3F01',
+								url: '/static/media/logo.5d5d9eef.svg'
+							}])})}}>
+						add image marker
+					</button>
 				</p>
 
-				{this.state.showMap && <FMap {...mapProps} imageMarkers={images} loadComplete={() => {
+				{this.state.showMap && <FMap {...mapProps} imageMarkers={this.state.images} loadComplete={() => {
 					this.test1();
 					this.test2();
 				}} initialPosition={initialPosition} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
