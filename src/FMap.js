@@ -110,6 +110,9 @@ class FMap extends Component {
 	// text marker
 	addTextMarker(textMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
+		if(!group) {
+			return;
+		}
 		const layer = group.getOrCreateLayer('textMarker');
 		layer.removeAll();
 		group.addLayer(layer);
@@ -125,6 +128,9 @@ class FMap extends Component {
 	//image marker
 	addImageMarker(imageMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
+		if(!group) {
+			return;
+		}
 		const layer = group.getOrCreateLayer('imageMarker');
 		layer.removeAll();
 		group.addLayer(layer);
