@@ -1,6 +1,6 @@
 {
   "name": "react-fmap",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "private": false,
   "author": "kairi",
   "email": "kairi1227@126.com",
@@ -8,7 +8,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kairi1227/react-fmap.git"
+    "url": "git+https://github.com/wafersystems/react-fmap.git"
   },
   "files": [
     "dist",
