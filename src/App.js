@@ -41,7 +41,7 @@ class App extends Component {
 					url: '/static/media/logo.5d5d9eef.svg'
 				}
 			],
-			rotate: 0
+			rotate: 30
 		};
 	}
 
@@ -53,8 +53,7 @@ class App extends Component {
 			mapKey: '3e7dba2418ac46e1af5a1abf17082db2',
 			height: 'calc(100vh - 254px)',
 			defaultViewMode: 'top',
-			url: './fengmap.min.js',
-			rotate: this.state.rotate
+			url: './fengmap.min.js'
 		};
 
 		const initialPosition = {x: 12958819.3, y: 4852556.59, z: 0};
@@ -137,7 +136,7 @@ class App extends Component {
 					</button>
 				</p>
 
-				{this.state.showMap && <FMap {...mapProps} imageMarkers={this.state.images} loadComplete={() => {
+				{this.state.showMap && <FMap rotate={this.state.rotate} {...mapProps} imageMarkers={this.state.images} loadComplete={() => {
 					this.test1();
 					this.test2();
 				}} initialPosition={initialPosition} toolControl={{groupsButtonNeeded: true}} textMarkers={this.state.stations} onClick={e => {
