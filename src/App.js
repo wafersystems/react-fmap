@@ -40,7 +40,8 @@ class App extends Component {
 					name: '3F01',
 					url: '/static/media/logo.5d5d9eef.svg'
 				}
-			]
+			],
+			rotate: 0
 		};
 	}
 
@@ -52,7 +53,8 @@ class App extends Component {
 			mapKey: '3e7dba2418ac46e1af5a1abf17082db2',
 			height: 'calc(100vh - 254px)',
 			defaultViewMode: 'top',
-			url: './fengmap.min.js'
+			url: './fengmap.min.js',
+			rotate: this.state.rotate
 		};
 
 		const initialPosition = {x: 12958819.3, y: 4852556.59, z: 0};
@@ -127,6 +129,11 @@ class App extends Component {
 								url: '/static/media/logo.5d5d9eef.svg'
 							}])})}}>
 						add image marker
+					</button>
+					<button onClick={() => {
+							this.setState({rotate: 78})
+					}}>
+						set rotate
 					</button>
 				</p>
 

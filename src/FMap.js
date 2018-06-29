@@ -15,8 +15,15 @@ class FMap extends Component {
 	constructor(props) {
 		super(props);
 		this.mapView = null;
-		this.state = { textMarkers : props.textMarkers || [], imageMarkers : props.imageMarkers || [], drawNaviLines: props.drawNaviLines || []};
-		loadFengmap(props.url).then(e => this.initialMap(e)).catch(e => {throw new Error(e)});
+		this.state = {
+			textMarkers: props.textMarkers || [],
+			imageMarkers: props.imageMarkers || [],
+			drawNaviLines: props.drawNaviLines || [],
+			rotate: props.rotate || 0
+		};
+		loadFengmap(props.url).then(e => this.initialMap(e)).catch(e => {
+			throw new Error(e)
+		});
 	}
 
 
@@ -26,23 +33,26 @@ class FMap extends Component {
 	}
 
 	componentWillReceiveProps(np) {
-		if(!isEqual(np.textMarkers, this.props.textMarkers)) {
+		if (!isEqual(np.textMarkers, this.props.textMarkers)) {
 			this.setState({textMarkers: np.textMarkers});
 			this.addTextMarker(np.textMarkers);
 		}
-		if(!isEqual(np.imageMarkers, this.props.imageMarkers)) {
+		if (!isEqual(np.imageMarkers, this.props.imageMarkers)) {
 			this.setState({imageMarkers: np.imageMarkers});
 			this.addImageMarker(np.imageMarkers);
 		}
-		if(!isEqual(np.drawNaviLines, this.props.drawNaviLines)) {
+		if (!isEqual(np.drawNaviLines, this.props.drawNaviLines)) {
 			this.setState({drawNaviLines: np.drawNaviLines});
 			this.drawNaviLine(np.drawNaviLines);
 		}
-		if(!isEqual(np.popMarkers, this.props.popMarkers)) {
+		if (!isEqual(np.popMarkers, this.props.popMarkers)) {
 			const newTemp = np.popMarkers.filter(n => this.props.popMarkers.every(o => !isEqual(o, n))) || [];
-			for(const marker of newTemp) {
+			for (const marker of newTemp) {
 				this.setPopMarker(marker);
 			}
+		}
+		if(np.rotate !== this.props.rotate) {
+			this.setRotateAngle(np.rotate);
 		}
 	}
 
@@ -55,7 +65,8 @@ class FMap extends Component {
 			toolControl, controlOptions,
 			offLineOptions,
 			initialPosition,
-			loadComplete
+			loadComplete,
+			rotate
 		} = this.props;
 		this.map = new this.fengmap.FMMap({
 			container: document.getElementById('fmap-container'), //渲染dom
@@ -77,6 +88,7 @@ class FMap extends Component {
 			this.addTextMarker();
 			this.addImageMarker();
 			this.drawNaviLine();
+			this.setRotateAngle(rotate);
 			initialPosition && this.map.moveTo({groupID: this.map.groupIDs[0], ...initialPosition});
 			loadComplete && loadComplete();
 		});
@@ -94,8 +106,8 @@ class FMap extends Component {
 	// }
 
 	setViewMode(e) {
-		if(this.map) {
-			if([this.fengmap.FMViewMode.MODE_2D, this.fengmap.FMViewMode.MODE_3D].some(t => t === e)) {
+		if (this.map) {
+			if ([this.fengmap.FMViewMode.MODE_2D, this.fengmap.FMViewMode.MODE_3D].some(t => t === e)) {
 				this.map.viewMode = e;
 			} else {
 				window.console.error('prop is one of [3d, top] ');
@@ -103,11 +115,23 @@ class FMap extends Component {
 		}
 	}
 
+	setRotateAngle(angle) {
+		if(this.map) {
+			if(typeof angle !== 'number') {
+				throw new Error('setRotateAngle\'s props is number')
+			} else {
+				this.map.rotateAngle = angle;
+			}
+		}
+	}
+
+
+
 	setTheme(theme) {
-		if(!theme) {
+		if (!theme) {
 			window.console.error('theme name isn\'t allow empty. ');
 		}
-		if(this.map) {
+		if (this.map) {
 			this.map.themeName = theme;
 		}
 	}
@@ -115,13 +139,13 @@ class FMap extends Component {
 	// text marker
 	addTextMarker(textMarkers = this.state.textMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
-		if(!group) {
+		if (!group) {
 			return;
 		}
 		const layer = group.getOrCreateLayer('textMarker');
 		layer.removeAll();
 		group.addLayer(layer);
-		for(const mark of textMarkers) {
+		for (const mark of textMarkers) {
 			const im = new this.fengmap.FMTextMarker({
 				...mark,
 				callback: () => im.alwaysShow()
@@ -133,13 +157,13 @@ class FMap extends Component {
 	//image marker
 	addImageMarker(imageMarkers = this.state.imageMarkers, groupID) {
 		const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
-		if(!group) {
+		if (!group) {
 			return;
 		}
 		const layer = group.getOrCreateLayer('imageMarker');
 		layer.removeAll();
 		group.addLayer(layer);
-		for(const mark of imageMarkers) {
+		for (const mark of imageMarkers) {
 			const im = new this.fengmap.FMImageMarker({
 				...mark,
 				callback: () => im.alwaysShow()
@@ -149,23 +173,23 @@ class FMap extends Component {
 	}
 
 	drawNaviLine(lines = this.state.drawNaviLines) {
-		for(const line of lines) {
-			if(!line.lineStyle || !line.startPoint || !line.endPoint) {
+		for (const line of lines) {
+			if (!line.lineStyle || !line.startPoint || !line.endPoint) {
 				window.console.warn('Objects in drawNaviLines must include lineStyle, startPoint and endPoint.');
 				continue;
 			}
-			const navi = new fengmap.FMNavigation({
+			const navi = new this.fengmap.FMNavigation({
 				map: this.map,
 				// 设置导航线的样式
 				lineStyle: line.lineStyle
 			});
-			if(typeof line.startPoint !== 'object') {
+			if (typeof line.startPoint !== 'object') {
 				window.console.warn('startPoint must be object');
 				continue;
 			}
 			navi.setStartPoint(line.startPoint);
 
-			if(typeof line.endPoint !== 'object') {
+			if (typeof line.endPoint !== 'object') {
 				window.console.warn('endPoint must be object');
 				continue;
 			}
@@ -175,7 +199,7 @@ class FMap extends Component {
 	}
 
 	setPopMarker(options) {
-		if(!options) {
+		if (!options) {
 			throw new Error('controlOptions must be set.');
 		}
 		return new this.fengmap.FMPopInfoWindow(this.map, new this.fengmap.controlOptions(options));
@@ -234,7 +258,8 @@ FMap.propTypes = {
 	offLineOptions: PropsTypes.object,
 	initialPosition: PropsTypes.object,
 	loadComplete: PropsTypes.func,
-	drawNaviLines: PropsTypes.array
+	drawNaviLines: PropsTypes.array,
+	rotate: PropsTypes.number
 };
 
 FMap.defaultProps = {
@@ -253,11 +278,13 @@ FMap.defaultProps = {
 	popMarkers: null,
 	toolControl: null,
 	controlOptions: null,
-	setViewMode: () => {},
+	setViewMode: () => {
+	},
 	offLineOptions: {},
 	initialPosition: null,
 	loadComplete: null,
-	drawNaviLine: null
+	drawNaviLine: null,
+	rotate: 0
 };
 
 export default FMap;
