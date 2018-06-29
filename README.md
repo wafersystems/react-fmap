@@ -57,6 +57,7 @@ fengmap for react
 |popMarkers| `null` | false | pop marker. props is controlOptions. |
 |initialPosition| `null` | false | initial move to position. |
 |loadComplete| `null` | false | map load complete function. |
+|drawNaviLines| `null` | false | `[{lineStyle, startPoint, endPoint}]` |
 
 
 #### offLineOptions
