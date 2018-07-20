@@ -59,6 +59,9 @@ fengmap for react
 |loadComplete| `null` | false | map load complete function. |
 |drawNaviLines| `null` | false | `[{lineStyle, startPoint, endPoint}]` |
 |rotate| `0` | false | set map rotate angle |
+|mapServerURL|  | false | set map server url |
+|mapThemeURL|  | false | set map theme url |
+|defaultThemeName| | false | set map theme name |
 
 
 #### offLineOptions
