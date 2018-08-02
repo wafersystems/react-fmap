@@ -11,6 +11,7 @@ class FMap extends Component {
 
   map = null;
   fengmap = window.fengmap;
+  navigation = null;
 
   constructor(props) {
     super(props);
@@ -171,6 +172,9 @@ class FMap extends Component {
   }
 
   drawNaviLine(lines = this.state.drawNaviLines) {
+    if(this.navigation){
+      this.navigation.clearAll ();
+    }
     for (const line of lines) {
       if (!line.lineStyle || !line.startPoint || !line.endPoint) {
         window.console.warn('Objects in drawNaviLines must include lineStyle, startPoint and endPoint.');
@@ -193,6 +197,7 @@ class FMap extends Component {
       }
       navi.setEndPoint(line.endPoint);
       navi.drawNaviLine();
+      this.navigation = navi;
     }
   }
 
