@@ -2,9 +2,9 @@
  * date: 2018-05-03 13:52
  * auth: XuQiang
  **/
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropsTypes from 'prop-types';
-import {loadFengmap} from './loadFengmap';
+import { loadFengmap } from './loadFengmap';
 import isEqual from 'lodash/isEqual';
 
 class FMap extends Component {
@@ -22,6 +22,8 @@ class FMap extends Component {
       drawNaviLines: props.drawNaviLines || [],
       rotate: props.rotate || 0
     };
+    this.processData = this.processData.bind(this);
+    this.checkMapNull = this.checkMapNull.bind(this);
     loadFengmap(props.url).then(e => this.initialMap(e)).catch(e => {
       throw new Error(e)
     });
@@ -31,19 +33,40 @@ class FMap extends Component {
   componentWillUnmount() {
     this.map = null;
     this.fengmap = null;
+    this.timer = null;
   }
 
   componentWillReceiveProps(np) {
+    if (!this.map) {
+      setTimeout(() => {
+        this.checkMapNull(np)
+      }, 200)
+    } else {
+      this.processData(np);
+    }
+  }
+
+  checkMapNull(np) {
+    if (!this.map) {
+      setTimeout(() => {
+        this.processData(np)
+      }, 200)
+    } else {
+      this.processData(np);
+    }
+  }
+
+  processData(np) {
     if (!isEqual(np.textMarkers, this.props.textMarkers)) {
-      this.setState({textMarkers: np.textMarkers});
+      this.setState({ textMarkers: np.textMarkers });
       this.addTextMarker(np.textMarkers);
     }
     if (!isEqual(np.imageMarkers, this.props.imageMarkers)) {
-      this.setState({imageMarkers: np.imageMarkers});
+      this.setState({ imageMarkers: np.imageMarkers });
       this.addImageMarker(np.imageMarkers);
     }
     if (!isEqual(np.drawNaviLines, this.props.drawNaviLines)) {
-      this.setState({drawNaviLines: np.drawNaviLines});
+      this.setState({ drawNaviLines: np.drawNaviLines });
       this.drawNaviLine(np.drawNaviLines);
     }
     if (!isEqual(np.popMarkers, this.props.popMarkers)) {
@@ -89,12 +112,12 @@ class FMap extends Component {
       this.addImageMarker();
       this.drawNaviLine();
       this.setRotateAngle(rotate);
-      initialPosition && this.map.moveTo({groupID: this.map.groupIDs[0], ...initialPosition});
+      initialPosition && this.map.moveTo({ groupID: this.map.groupIDs[0], ...initialPosition });
       loadComplete && loadComplete();
     });
 
-    toolControl && new this.fengmap.toolControl(this.map, {...toolControl});
-    controlOptions && new this.fengmap.controlOptions({...controlOptions});
+    toolControl && new this.fengmap.toolControl(this.map, { ...toolControl });
+    controlOptions && new this.fengmap.controlOptions({ ...controlOptions });
   }
 
 
@@ -137,43 +160,53 @@ class FMap extends Component {
 
   // text marker
   addTextMarker(textMarkers = this.state.textMarkers, groupID) {
-    const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
-    if (!group) {
-      return;
-    }
-    const layer = group.getOrCreateLayer('textMarker');
-    layer.removeAll();
-    group.addLayer(layer);
-    for (const mark of textMarkers) {
-      const im = new this.fengmap.FMTextMarker({
-        ...mark,
-        callback: () => im.alwaysShow()
-      });
-      layer.addMarker(im);
+    try {
+      const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
+      if (!group) {
+        return;
+      }
+      const layer = group.getOrCreateLayer('textMarker');
+      layer.removeAll();
+      group.addLayer(layer);
+      for (const mark of textMarkers) {
+        const im = new this.fengmap.FMTextMarker({
+          ...mark,
+          callback: () => im.alwaysShow()
+        });
+        layer.addMarker(im);
+      }
+    } catch (e) {
+      window.console.error(e)
+      window.console.log(this.map)
     }
   }
 
   //image marker
   addImageMarker(imageMarkers = this.state.imageMarkers, groupID) {
-    const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
-    if (!group) {
-      return;
-    }
-    const layer = group.getOrCreateLayer('imageMarker');
-    layer.removeAll();
-    group.addLayer(layer);
-    for (const mark of imageMarkers) {
-      const im = new this.fengmap.FMImageMarker({
-        ...mark,
-        callback: () => im.alwaysShow()
-      });
-      layer.addMarker(im);
+    try {
+      const group = this.map.getFMGroup(groupID || this.map.groupIDs[0]);
+      if (!group) {
+        return;
+      }
+      const layer = group.getOrCreateLayer('imageMarker');
+      layer.removeAll();
+      group.addLayer(layer);
+      for (const mark of imageMarkers) {
+        const im = new this.fengmap.FMImageMarker({
+          ...mark,
+          callback: () => im.alwaysShow()
+        });
+        layer.addMarker(im);
+      }
+    } catch (e) {
+      window.console.error(e)
+      window.console.log(this.map)
     }
   }
 
   drawNaviLine(lines = this.state.drawNaviLines) {
-    if(this.navigation){
-      this.navigation.clearAll ();
+    if (this.navigation) {
+      this.navigation.clearAll();
     }
     for (const line of lines) {
       if (!line.lineStyle || !line.startPoint || !line.endPoint) {
@@ -209,7 +242,7 @@ class FMap extends Component {
   }
 
   render() {
-    const {className, width, height} = this.props;
+    const { className, width, height } = this.props;
 
     const styles = {
       width,
@@ -217,7 +250,7 @@ class FMap extends Component {
     };
 
     return (
-        <div id={'fmap-container'} className={className} style={styles} ref={r => this.mapView = r}/>
+      <div id={'fmap-container'} className={className} style={styles} ref={r => this.mapView = r} />
     );
   }
 
@@ -231,7 +264,7 @@ class FMap extends Component {
 
   //定位，导航
   onNavigation(options) {
-    return new this.fengmap.FMNavigation({map: this.map, ...options});
+    return new this.fengmap.FMNavigation({ map: this.map, ...options });
   }
 
   onMapFunction(funcName, ...args) {
