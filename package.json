@@ -1,10 +1,10 @@
 {
   "name": "react-fmap",
-  "version": "0.4.12",
+  "version": "0.5.0",
   "private": false,
-  "author": "kairi",
-  "email": "kairi1227@126.com",
-  "license": "Version 2.0",
+  "author": "vincent",
+  "email": "alfa.king+git@gmail.com",
+  "license": "MIT",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -21,8 +21,8 @@
   "dependencies": {
     "lodash": "^4.17.11",
     "prop-types": "^15.6.1",
-    "react": "15.4.0",
-    "react-dom": "15.4.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
